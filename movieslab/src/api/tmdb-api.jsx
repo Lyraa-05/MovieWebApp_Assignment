@@ -1,6 +1,7 @@
+//updated basic discover movies to include movies that have atleast 1000 votes to avoid obscure movies, now there is a different output to popularmovies.
 export const getMovies = () => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&sort_by=vote_average.desc&vote_count.gte=1000`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -27,6 +28,23 @@ export const getUpcomingMovies = () => {
   })
   .catch((error) => {
       throw error
+  });
+};
+
+//new popular movies API
+export const getPopularMovies = () => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Uh oh :("); 
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error
   });
 };
 
