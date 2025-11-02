@@ -3,8 +3,10 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
+import Box from "@mui/material/Box";
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({ movies, title, action, page, totalPages, onPageChange }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -20,6 +22,11 @@ function MovieListPageTemplate({ movies, title, action }) {
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else setGenreFilter(value);
+  };
+
+  const handlePageChange = (event, value) => {
+    onPageChange(value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -41,6 +48,21 @@ function MovieListPageTemplate({ movies, title, action }) {
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
+      
+      {/* Pages */}
+      {totalPages > 1 && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4, width: '100%' }}>
+          <Pagination 
+            count={totalPages} 
+            page={page} 
+            onChange={handlePageChange}
+            color="primary"
+            size="large"
+            showFirstButton
+            showLastButton
+          />
+        </Box>
+      )}
     </Grid>
   );
 }

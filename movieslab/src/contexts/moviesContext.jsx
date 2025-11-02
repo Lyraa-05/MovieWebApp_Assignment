@@ -18,6 +18,7 @@ const MoviesContextProvider = (props) => {
     setFavorites(newFavorites)
   };
 
+  //new playlist functionality
   const addToPlaylist = (movie) => {
     let newPlaylists = [];
     if (!playlists.includes(movie.id)){
@@ -30,6 +31,7 @@ const MoviesContextProvider = (props) => {
   };
   console.log(playlists);
 
+  
   const removeFromPlaylist = (movie) => {
     setPlaylists( playlists.filter(
       (mId) => mId !== movie.id
