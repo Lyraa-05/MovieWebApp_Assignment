@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Spinner from "../components/spinner";
 import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavourites";
+import RemoveFromPlaylistIcon from "../components/cardIcons/removeFromPlaylist";
 const PopularMoviesPage = (props) => {
 
     const { data, error, isPending, isError } = useQuery({
@@ -31,6 +32,7 @@ const PopularMoviesPage = (props) => {
                     <>
                         <AddToFavoritesIcon movie={movie} />
                         <AddToPlaylistIcon movie={movie} />
+                        
                     </>
                 )
             }}
