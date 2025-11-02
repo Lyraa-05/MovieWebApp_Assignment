@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 import Chip from "@mui/material/Chip";
@@ -9,7 +10,10 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import PeopleIcon from "@mui/icons-material/People";
+import RecommendIcon from "@mui/icons-material/Recommend";
 
 const root = {
     display: "flex",
@@ -23,9 +27,28 @@ const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
+      {/* Navigation Buttons */}
+      <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
+        <Button 
+          variant="outlined" 
+          startIcon={<PeopleIcon />}
+          onClick={() => navigate(`/movies/${movie.id}/credits`)}
+        >
+          View Cast
+        </Button>
+        <Button 
+          variant="outlined" 
+          startIcon={<RecommendIcon />}
+          onClick={() => navigate(`/movies/${movie.id}/recommendations`)}
+        >
+          Recommendations
+        </Button>
+      </Box>
+
       <Typography variant="h5" component="h3">
         Overview
       </Typography>
